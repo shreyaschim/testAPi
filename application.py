@@ -63,7 +63,7 @@ def ner(search):
 
     try:
         article = wiki.summary(search)
-        model = spacy.load("en")
+        model = spacy.load('en_core_web_sm')
         results = model(article)
 
 
