@@ -1,4 +1,5 @@
 
+
 # Using flask to make an api 
 # import necessary libraries and functions 
 from flask import Flask, jsonify, request, make_response,redirect
@@ -62,28 +63,27 @@ def ner(search):
 
     try:
         article = wiki.summary(search)
-        # model = spacy.load("en_core_web_md")
-        # results = model(article)
+        model = spacy.load("en_core_web_md")
+        results = model(article)
 
 
-        # labels = []
-        # for element in results.ents:
-        #     labels.append(element.label_)
+        labels = []
+        for element in results.ents:
+            labels.append(element.label_)
 
-        # data = []
-        # for i in set(labels):
-        #     data.append([labels.count(i),str(i)])
+        data = []
+        for i in set(labels):
+            data.append([labels.count(i),str(i)])
     
-        # df = pd.DataFrame(data,columns=('Occurance','Labels'))
-        # df = df.rename(columns={'Labels':'index'}).set_index('index')
-        # df = df.to_json()
+        df = pd.DataFrame(data,columns=('Occurance','Labels'))
+        df = df.rename(columns={'Labels':'index'}).set_index('index')
+        df = df.to_json()
 
-        # html = spacy.displacy.render(results, style="ent")
-        # style = "<style> { display: inline-block }</style>"
-        # page = f"{style}{get_html(html)}"
+        html = spacy.displacy.render(results, style="ent")
+        style = "<style> { display: inline-block }</style>"
+        page = f"{style}{get_html(html)}"
 
-        # return jsonify({'link': page, 'data' : df, 'status': "success", 'message': "Article processed!"}) 
-        return jsonify({'text': article, 'status': "success", 'message': "Article not found!"}) 
+        return jsonify({'link': page, 'data' : df, 'status': "success", 'message': "Article processed!"}) 
 
     except:
         return jsonify({'status': "failed",'message': "Article not found!"}) 
