@@ -9,7 +9,6 @@ import wikipedia as wiki
 import spacy
 import pandas as pd
 from  functools import wraps
-import en_core_web_sm
 
 # creating a Flask app 
 application = Flask(__name__) 
@@ -64,7 +63,7 @@ def ner(search):
 
     try:
         article = wiki.summary(search)
-        model = spacy.load(en_core_web_md)
+        model = spacy.load("en_core_web_sm")
         results = model(article)
 
 
