@@ -9,7 +9,7 @@ import wikipedia as wiki
 import spacy
 import pandas as pd
 from  functools import wraps
-import en_core_web_md
+import en_core_web_sm
 
 # creating a Flask app 
 application = Flask(__name__) 
